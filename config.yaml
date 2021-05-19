@@ -8,7 +8,7 @@ spec:
  ports:
    - protocol: TCP
      port: 80
-     nodePort: 30001
+     nodePort: 80
  type: NodePort
 ---
 apiVersion: apps/v1
@@ -18,7 +18,7 @@ metadata:
  labels:
    role: app
 spec:
- replicas: 2
+ replicas: 1
  selector:
    matchLabels:
      role: app
