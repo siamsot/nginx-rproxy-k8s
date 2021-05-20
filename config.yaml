@@ -1,4 +1,23 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    server {
+        return 403; # so that our server doesn't serve for any domain name
+    }
+    server {
+       listen 80;
+       listen [::]:80;
+       server_name {ip or domain};
+       location /hello/ {
+            proxy_pass  http://localhost:8080/;
+            # return 301 https://{ip or domain}$request_uri; for https
+        }
+    }
+---
+apiVersion: v1
 kind: Service
 metadata:
  name: hello-service
