@@ -2,6 +2,7 @@ For our application, we will need to have installed:
 1. [Docker](https://docs.docker.com/engine/install/ubuntu/)
 2. [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 3. [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+4. [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 (In case you encounter a "permission denied" error while starting Docker, you can use [this](https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue) solution)
 
