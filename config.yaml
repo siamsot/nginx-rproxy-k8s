@@ -4,60 +4,66 @@ metadata:
   name: nginx-config
 data:
   nginx.conf: |
-    server {
+    events {
+      worker_connections  4096;  ## Default: 1024
+    }
+    http {
+      server {
         return 403; # so that our server doesn't serve for any domain name
     }
     server {
        listen 80;
        listen [::]:80;
-       server_name {ip or domain};
+       server_name 34.118.63.180;
        location /hello/ {
             proxy_pass  http://localhost:8080/;
             # return 301 https://{ip or domain}$request_uri; for https
-        }
+      }
+    }
     }
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: hello-service
+  name: hello-service
 spec:
- selector:
-   role: app
- ports:
-   - protocol: TCP
-     port: 80
-     nodePort: 30001
- type: NodePort
+  selector:
+    role: app
+  ports:
+    - protocol: TCP
+      port: 80
+      nodePort: 80
+  type: NodePort
+
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: hello-deployment
- labels:
-   role: app
+  name: hello-deployment
+  labels:
+    role: app
 spec:
- replicas: 1
- selector:
-   matchLabels:
-     role: app
- template:
-   metadata:
-     labels:
-       role: app
-   spec:
-     containers:
-     - name: app
-       imagePullPolicy: Always
-       image: "siamsot/flask-hello"
-     - name: proxy
-       imagePullPolicy: Always
-       image: nginx
-       volumeMounts:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: app
+  template:
+    metadata:
+      labels:
+        role: app
+    spec:
+      containers:
+        - name: app
+          imagePullPolicy: Always
+          image: "siamsot/flask-hello"
+        - name: proxy
+          imagePullPolicy: Always
+          image: nginx
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      volumes:
         - name: nginx-config
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
-    volumes:
-    - name: nginx-config
-      configMap:
-        name: nginx-config
+          configMap:
+            name: nginx-config
