@@ -7,7 +7,8 @@ For our application, we will need to have installed:
 
 Instructions to run the app:
 
-1. Clone the repository by running the command "git clone https://github.com/siamsot/nginx-rproxy-k8s"
+1. Port 80 must be exposed on our machine (and 443 for https traffic).
+2. Clone the repository by running the command "git clone https://github.com/siamsot/nginx-rproxy-k8s"
 2. Start Minikube with "minikube start --extra-config=apiserver.service-node-port-range=1-65535"
    This is done because we've set the nodePort to 80 which isn't in the default range
 3. Navigate to the directory where our configuration yaml file is with "cd nginx-rproxy-k8s"
