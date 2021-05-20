@@ -29,6 +29,8 @@ spec:
    spec:
      containers:
      - name: app
+       imagePullPolicy: Always
        image: "siamsot/flask-hello"
      - name: proxy
+       imagePullPolicy: Always
        image: "siamsot/nginxsidecar"
