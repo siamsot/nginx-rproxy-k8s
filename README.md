@@ -13,6 +13,10 @@ Instructions to run the app:
 2. Start Minikube with "minikube start --extra-config=apiserver.service-node-port-range=1-65535"
    This is done because we've set the nodePort to 80 which isn't in the default range
 3. Navigate to the directory where our configuration yaml file is with "cd nginx-rproxy-k8s"
-4. Deploy our application with "kubectl apply -f config.yaml"
+4. Edit the config.yaml file and change the {ip or domain} field to your machine's IP address
+5. Deploy our application with "kubectl apply -f config.yaml"
+6. Run the command "sudo kubectl --address 0.0.0.0 port-forward svc/hello-service 80:80"
+   It's needed to run the command with sudo privileges in order to expose the service to port 80
 
+   
 This solution was chosen over a solution with docker compose as it is closer to a production environment
