@@ -1,0 +1,20 @@
+{
+    "profile":
+        {
+            "name": "Sotirios",
+            "surname": "Siamandouras",
+            "city": "Barcelona",
+            "hobbies":
+                [
+                    "football",
+                    "crossfit",
+                    "gaming",
+                ],
+            "work":
+                {
+                    "company_name": "Webhelp",
+                    "role": "Quality Analyst"
+                }
+
+        }
+}
