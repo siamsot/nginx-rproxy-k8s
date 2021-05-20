@@ -14,7 +14,7 @@ data:
     server {
        listen 80;
        listen [::]:80;
-       server_name 34.118.63.180;
+       server_name {server ip};
        location /hello/ {
             proxy_pass  http://localhost:8080/;
             # return 301 https://{ip or domain}$request_uri; for https
